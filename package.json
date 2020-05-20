@@ -2,7 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "engines": {
+    "node": "12.x"
+  },
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js/"
@@ -10,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "check-node-version": "^2.1.0",
     "cluster": "^0.7.7",
     "express": "^4.17.1",
@@ -18,7 +22,11 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
     "nodemon": "^2.0.2"
-  }
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }

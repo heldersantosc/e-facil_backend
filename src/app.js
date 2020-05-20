@@ -1,13 +1,13 @@
 /** framework para node */
 const express = require("express");
-//const cors = require("cors");
+const cors = require("cors");
 const routes = require("./routes.js");
 const errors = require("./errors/errors");
 
 const app = express();
 
 /** funcao para ser usado em navegadores externos  */
-//app.use(cors());
+app.use(cors());
 
 /** chamada para usar json no body */
 app.use(express.json());
