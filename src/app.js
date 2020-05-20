@@ -1,10 +1,13 @@
 /** framework para node */
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const routes = require("./routes.js");
 const errors = require("./errors/errors");
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 
 /** funcao para ser usado em navegadores externos  */
 app.use(cors());
