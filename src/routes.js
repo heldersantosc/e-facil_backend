@@ -6,7 +6,7 @@ const StatusController = require("./controller/StatusController");
 
 /** rota para página inicial  */
 routes.get("/", (request, response) => {
-  response.send(request.body);
+  response.send("Welcome to e-Facil");
 });
 
 /** rotas de unidades */
