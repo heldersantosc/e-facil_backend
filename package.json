@@ -14,11 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "check-node-version": "^2.1.0",
-    "cluster": "^0.7.7",
     "express": "^4.17.1",
     "knex": "^0.20.15",
-    "os": "^0.1.1",
     "sqlite3": "^4.1.1"
   },
   "keywords": [
