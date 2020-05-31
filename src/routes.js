@@ -17,7 +17,7 @@ routes.put("/unit/update", UnitController.update);
 routes.delete("/unit/delete/:id", UnitController.delete);
 
 /** rotas de vagas */
-routes.get("/vacancy", VacancyController.index);
+routes.get("/vacancies/:floor", VacancyController.index);
 
 /** rotas de status */
 routes.get("/status", StatusController.index);

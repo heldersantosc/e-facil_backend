@@ -3,15 +3,19 @@ const connection = require("../database/connection");
 module.exports = {
   /** lista as unidades */
   async index(request, response) {
+    const { floor } = request.params;
+    console.log(floor);
     const list = await new connection("vaga")
-      //.join("status", "unidade.status", "=", "status.id_status")
+      .join("status", "vaga.status", "=", "status.id_status")
       .select(
         "vaga.rowid",
         "vaga.unidade",
         "vaga.andar",
         "vaga.vaga",
-        "vaga.status"
-      );
+        "status.status_en as status",
+        "vaga.acessibilidade"
+      )
+      .where({ andar: floor });
 
     return response.json(list);
   },
