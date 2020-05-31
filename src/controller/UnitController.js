@@ -3,11 +3,13 @@ const connection = require("../database/connection");
 module.exports = {
   /** lista as unidades */
   async index(request, response) {
-    const list = await new connection("unit")
-      .join("status", "unit.status_id", "=", "status.id")
-      .select("unit.id", "unit.name", "status.name as status");
+    const list = await new connection("unidade")
+      .join("status", "unidade.status_id", "=", "status.id")
+      .select("unidade.id", "unidade.name", "status.name as status")
+      .catch((err) => {
+        console.log(err);
+      });
 
-    console.log("index");
     return response.json(list);
   },
 
@@ -16,7 +18,7 @@ module.exports = {
     const unit = {};
     unit.name = request.body.name;
     unit.status_id = request.body.status_id;
-    const query = await new connection("unit")
+    const query = await new connection("unidade")
       .insert(unit)
       .then(() => {
         console.log("store");
@@ -34,7 +36,7 @@ module.exports = {
   /** atualiza unidade */
   async update(request, response) {
     const { id, status_id } = request.body;
-    const query = await new connection("unit")
+    const query = await new connection("unidade")
       .where("id", "=", id)
       .update({ status_id: status_id })
       .decrement({
@@ -55,7 +57,7 @@ module.exports = {
   /** deleta uma unidade */
   async delete(request, response) {
     const { id } = request.params;
-    const query = await new connection("unit").where("id", id).del();
+    const query = await new connection("unidade").where("id", id).del();
     console.log("delete");
     return response.json(id);
   },

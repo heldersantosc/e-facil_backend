@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js/"
+    "start": "node src/server.js/",
+    "dev": "nodemon src/server.js/"
   },
   "author": "",
   "license": "ISC",
@@ -22,5 +23,8 @@
     "node",
     "heroku",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
