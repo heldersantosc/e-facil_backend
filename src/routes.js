@@ -2,6 +2,7 @@ const express = require("express");
 const routes = express.Router();
 
 const UnitController = require("./controller/UnitController");
+const VacancyController = require("./controller/VacancyController");
 const StatusController = require("./controller/StatusController");
 
 /** rota para página inicial  */
@@ -14,6 +15,9 @@ routes.get("/unit", UnitController.index);
 routes.post("/unit/insert", UnitController.store);
 routes.put("/unit/update", UnitController.update);
 routes.delete("/unit/delete/:id", UnitController.delete);
+
+/** rotas de vagas */
+routes.get("/vacancy", VacancyController.index);
 
 /** rotas de status */
 routes.get("/status", StatusController.index);
