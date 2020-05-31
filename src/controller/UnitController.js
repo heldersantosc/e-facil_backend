@@ -4,11 +4,8 @@ module.exports = {
   /** lista as unidades */
   async index(request, response) {
     const list = await new connection("unidade")
-      .join("status", "unidade.status_id", "=", "status.id")
-      .select("unidade.id", "unidade.name", "status.name as status")
-      .catch((err) => {
-        console.log(err);
-      });
+      .join("status", "unidade.status", "=", "status.id_status")
+      .select("unidade.rowid", "unidade.unidade", "status.status as status");
 
     return response.json(list);
   },

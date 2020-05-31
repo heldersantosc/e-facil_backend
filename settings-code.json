@@ -1,0 +1,52 @@
+{
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontSize": 11,
+    "editor.tokenColorCustomizations": {
+        "[Dracula]": {
+            "variables": "#bae8e8"
+        }
+    },
+    "editor.formatOnSave": true,
+    // Enable per-language
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.zoomLevel": 1,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "editor.minimap.enabled": false,
+    "python.jediEnabled": false,
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.rendererType": "dom",
+    "workbench.statusBar.visible": true,
+    "workbench.preferredDarkColorTheme": "Dracula",
+    "workbench.colorTheme": "Dracula",
+    "files.autoSave": "off",
+    "editor.wordWrapColumn": 120,
+    "workbench.commandPalette.history": 80,
+    "workbench.tree.indent": 16,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}

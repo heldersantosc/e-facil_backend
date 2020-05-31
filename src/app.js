@@ -22,6 +22,8 @@ app.use(errors);
 /** desabilitando o x-powered-by */
 app.disable("x-powered-by");
 
+app.set({ "content-type": "application/json; charset=utf-8" });
+
 /** tratativa de leaking de erro  */
 app.use((err, req, res, next) => {
   console.error(err.stack);
