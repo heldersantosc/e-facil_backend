@@ -1,13 +1,20 @@
 const connection = require("../database/connection");
 
 module.exports = {
-  /** lista as unidades */
+  /** lista os andares */
   async index(request, response) {
-    const list = await new connection("unidade")
-      .join("status", "unidade.status", "=", "status.id_status")
-      .select("unidade.rowid", "unidade.unidade", "status.status_en as status");
+    const { unit } = request.params;
+    const list = await new connection("andar as a")
+      .select("a.rowid", "a.unidade", "a.andar", "s.status_en as status")
+      .leftJoin("status as s", "a.status", "=", "s.id_status")
+      .where({ "a.unidade": unit })
+      .orderBy("a.rowid", "desc");
 
-    return response.json(list);
+    const vacancy = await new connection("vaga")
+      .select("unidade", "andar")
+      .where("unidade", 1)
+      .count("andar");
+    return response.json(vacancy);
   },
 
   /** criação de unidade */

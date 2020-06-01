@@ -4,7 +4,6 @@ module.exports = {
   /** lista as unidades */
   async index(request, response) {
     const { floor } = request.params;
-    console.log(floor);
     const list = await new connection("vaga")
       .join("status", "vaga.status", "=", "status.id_status")
       .select(
