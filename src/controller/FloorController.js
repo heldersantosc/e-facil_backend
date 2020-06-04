@@ -4,17 +4,24 @@ module.exports = {
   /** lista os andares */
   async index(request, response) {
     const { unit } = request.params;
-    const list = await new connection("andar as a")
-      .select("a.rowid", "a.unidade", "a.andar", "s.status_en as status")
-      .leftJoin("status as s", "a.status", "=", "s.id_status")
-      .where({ "a.unidade": unit })
-      .orderBy("a.rowid", "desc");
+    const list = await new connection("unidade")
+      .select("id_unidade_andar", "unidade.andar", "status.status_en as status")
+      .leftJoin("status", "unidade.status", "=", "status.id_status")
+      .where("unidade.unidade", "=", `${unit}`);
+    const countFloor = await new connection("vaga")
+      .count("vaga.vaga as total")
+      .where("vaga.id_unidade_andar", "=", "11-S1");
 
-    const vacancy = await new connection("vaga")
-      .select("unidade", "andar")
-      .where("unidade", 1)
-      .count("andar");
-    return response.json(vacancy);
+    const reserva = await new connection("reserva")
+      .join("vaga", "vaga.id_vaga", "=", "reserva.id_vaga")
+      .where("reserva.data_entrada", "=", "2020-06-06")
+      .select(
+        "reserva.id_reserva as reserva",
+        "vaga.id_unidade_andar as unidade_andar",
+        "reserva.id_vaga as vaga"
+      );
+    console.log(reserva);
+    return response.json({ floor: list });
   },
 
   /** criação de unidade */

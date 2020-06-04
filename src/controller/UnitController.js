@@ -3,9 +3,12 @@ const connection = require("../database/connection");
 module.exports = {
   /** lista as unidades */
   async index(request, response) {
+    // const list = await new connection("unidade")
+    //   .join("status", "unidade.status", "=", "status.id_status")
+    //   .select("unidade.rowid", "unidade.unidade", "status.status_en as status");
     const list = await new connection("unidade")
-      .join("status", "unidade.status", "=", "status.id_status")
-      .select("unidade.rowid", "unidade.unidade", "status.status_en as status");
+      .select("id_unidade_andar", "unidade")
+      .groupBy("unidade");
 
     return response.json(list);
   },
