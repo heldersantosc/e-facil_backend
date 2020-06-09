@@ -3,7 +3,7 @@ const errors = express.Router();
 
 /** Erro de página não encontrada */
 errors.use((req, res, next) => {
-  res.status(404).send("<h1>Sorry cant find that!</h1>");
+  res.status(404).send("<h1>Not found!</h1>");
 });
 
 /** Tempo de resposta  */
