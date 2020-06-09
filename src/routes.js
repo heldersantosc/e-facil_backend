@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 
+const AuthController = require("./controller/AuthController");
 const UnitController = require("./controller/UnitController");
 const FloorController = require("./controller/FloorController");
 const VacancyController = require("./controller/VacancyController");
@@ -10,6 +11,8 @@ const StatusController = require("./controller/StatusController");
 routes.get("/", (request, response) => {
   response.send("Welcome to e-Facil");
 });
+
+routes.post("/authorization", AuthController.login);
 
 /** rotas de unidades */
 routes.get("/unit", UnitController.index);
