@@ -22,12 +22,15 @@ routes.delete("/unit/delete/:id", UnitController.delete);
 
 /** rotas de vagas */
 routes.get("/vacancies/:id_unidade_andar", VacancyController.index);
-routes.post("/vacancy/", VacancyController.reserve);
+routes.post("/vacancy/", VacancyController.reservation);
 
 /** rotas de andar */
 routes.get("/floor/:unit", FloorController.index);
 
 /** rotas de status */
 routes.get("/status", StatusController.index);
+
+/** rotas de reservas */
+routes.get("/reservations", VacancyController.reservation);
 
 module.exports = routes;

@@ -19,7 +19,7 @@ module.exports = {
   },
 
   /** reservar uma vaga */
-  async reserve(request, response) {
+  async reservation(request, response) {
     const { vacancyRequest } = request.params;
     const { vaga, matricula, data, status, hora } = request.body.data;
     console.log(request.body);
