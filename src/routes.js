@@ -6,6 +6,7 @@ const UnitController = require("./controller/UnitController");
 const FloorController = require("./controller/FloorController");
 const VacancyController = require("./controller/VacancyController");
 const StatusController = require("./controller/StatusController");
+const ReservationController = require("./controller/ReservationController");
 
 /** rota para página inicial  */
 routes.get("/", (request, response) => {
@@ -22,7 +23,6 @@ routes.delete("/unit/delete/:id", UnitController.delete);
 
 /** rotas de vagas */
 routes.get("/vacancies/:id_unidade_andar", VacancyController.index);
-routes.post("/vacancy/", VacancyController.reservation);
 
 /** rotas de andar */
 routes.get("/floor/:unit", FloorController.index);
@@ -31,6 +31,7 @@ routes.get("/floor/:unit", FloorController.index);
 routes.get("/status", StatusController.index);
 
 /** rotas de reservas */
-routes.get("/reservations", VacancyController.reservation);
+routes.get("/reservations", ReservationController.index);
+routes.post("/reservations/", ReservationController.reservation);
 
 module.exports = routes;

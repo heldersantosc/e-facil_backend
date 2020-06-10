@@ -18,30 +18,6 @@ module.exports = {
     return response.json(list);
   },
 
-  /** reservar uma vaga */
-  async reservation(request, response) {
-    const { vacancyRequest } = request.params;
-    const { vaga, matricula, data, status, hora } = request.body.data;
-    console.log(request.body);
-    const list = await new connection("reserva")
-      .insert({
-        id_vaga: vaga,
-        matricula: matricula,
-        status: status,
-        data_entrada: data,
-        hora_entrada: hora,
-      })
-      .then(async () => {
-        await new connection("vaga")
-          .where({
-            id_vaga: vaga,
-          })
-          .update({ status: 4 });
-      });
-
-    return response.json("ok");
-  },
-
   /** criação de unidade */
   async store(request, response) {
     const unit = {};

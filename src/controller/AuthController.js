@@ -4,6 +4,7 @@ module.exports = {
   async login(req, res) {
     const { matricula, acesso } = req.body;
     let auth = {};
+    let reservation = {};
     let returnData = {};
 
     if (acesso === "colaborador") {
@@ -16,6 +17,17 @@ module.exports = {
       auth = await new connection("aluno")
         .select("*")
         .where("aluno.matricula", "=", matricula);
+    }
+
+    if (acesso === "aluno") {
+      reservation = await new connection("reserva")
+        .select("*")
+        .where("reserva.matricula", "=", matricula);
+    }
+
+    if (Object.keys(reservation).length > 0) {
+      returnData = { auth: acesso, access: false, name: "" };
+      return res.status(401).json(returnData);
     }
 
     if (Object.keys(auth).length > 0 && Object.keys(auth).length < 2) {
