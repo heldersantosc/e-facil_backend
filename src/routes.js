@@ -33,5 +33,6 @@ routes.get("/status", StatusController.index);
 /** rotas de reservas */
 routes.get("/reservations", ReservationController.index);
 routes.post("/reservations/", ReservationController.reservation);
+routes.delete("/reservation/:id", ReservationController.remove);
 
 module.exports = routes;

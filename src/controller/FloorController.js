@@ -8,11 +8,23 @@ module.exports = {
       .select("id_unidade_andar", "unidade.andar", "status.status_en as status")
       .leftJoin("status", "unidade.status", "=", "status.id_status")
       .where("unidade.unidade", "=", `${unit}`);
-    const countFloor = await new connection("vaga")
-      .count("vaga.vaga as total")
-      .where("vaga.id_unidade_andar", "=", "11-S1");
 
-    const reserva = await new connection("reserva")
+    for (let index = 0; index < list.length; index++) {
+      const total = await contaVagasDisponiveis(list[index].id_unidade_andar);
+      list[index].vaga = total[0].total;
+      if (list[index].vaga === 0) {
+        list[index].status = "indisponible";
+      }
+    }
+
+    async function contaVagasDisponiveis(id_unidade_andar) {
+      return await new connection("vaga")
+        .count("vaga.vaga as total")
+        .where({ "vaga.id_unidade_andar": id_unidade_andar })
+        .where({ "vaga.status": 3 });
+    }
+
+    await new connection("reserva")
       .join("vaga", "vaga.id_vaga", "=", "reserva.id_vaga")
       .where("reserva.data_entrada", "=", "2020-06-06")
       .select(
@@ -20,7 +32,7 @@ module.exports = {
         "vaga.id_unidade_andar as unidade_andar",
         "reserva.id_vaga as vaga"
       );
-    console.log(reserva);
+
     return response.json({ floor: list });
   },
 
@@ -29,7 +41,7 @@ module.exports = {
     const unit = {};
     unit.name = request.body.name;
     unit.status_id = request.body.status_id;
-    const query = await new connection("unidade")
+    await new connection("unidade")
       .insert(unit)
       .then(() => {
         console.log("store");
@@ -47,7 +59,7 @@ module.exports = {
   /** atualiza unidade */
   async update(request, response) {
     const { id, status_id } = request.body;
-    const query = await new connection("unidade")
+    await new connection("unidade")
       .where("id", "=", id)
       .update({ status_id: status_id })
       .decrement({
@@ -55,7 +67,6 @@ module.exports = {
       })
       .clearCounters()
       .then(() => {
-        console.log("update");
         return response.json({
           success: `Campo ${id} atualizado com sucesso!`,
         });
@@ -68,8 +79,7 @@ module.exports = {
   /** deleta uma unidade */
   async delete(request, response) {
     const { id } = request.params;
-    const query = await new connection("unidade").where("id", id).del();
-    console.log("delete");
+    await new connection("unidade").where("id", id).del();
     return response.json(id);
   },
 };
